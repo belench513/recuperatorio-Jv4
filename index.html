@@ -1,0 +1,131 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark mode</title>
+<style>
+  /* Estilo del body en modo claro */
+  body  {
+    margin: auto;
+    margin-top: 150px;
+    width: 300px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    /* transition: background-color 0.3s, color 0.3s; */
+  }
+
+  /* Estilo boton en modo claro */
+  #BotonModo {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(30, 30, 35);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  /* Estilo del body en modo oscuro */
+  .dark-mode {
+    background-color: rgb(30, 30, 35);
+    color: white;
+  }
+
+  /* Estilo del boton en modo oscuro */
+  .dark-mode #BotonModo {
+    background-color: white;
+    color: black;
+  }
+
+  /* Estilo de las imágenes */
+  .image-container {
+    margin-top: 20px;
+  }
+
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: filter 0.3s;
+  }
+
+  .dark-mode .image-container img {
+    filter: brightness(0.8); /* Cambiar el brillo en modo oscuro */
+  }
+  .rating-container {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  .star {
+    color: gold;
+    cursor: pointer;
+  }
+
+  .rated {
+    color: orange;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Título de la página</h1>
+  <p>Bienvenido a mi super página web que es mejor que todas las que existen actualmente.</p>
+  <button id="BotonModo">🌙</button>
+
+  <!-- Imágenes con contenedores -->
+  <div class="image-container">
+    <img id="imagenClaro" src="descarga.jpeg" alt="Imagen en modo claro">
+    <img id="imagenOscuro" src="gatito.webp" alt="Imagen en modo oscuro">
+  </div>
+  <div class="rating-container" id="ratingContainer">
+    Calificación:
+    <span class="star" onclick="ratePage(1)" data-rating="1">★</span>
+    <span class="star" onclick="ratePage(2)" data-rating="2">★</span>
+    <span class="star" onclick="ratePage(3)" data-rating="3">★</span>
+    <span class="star" onclick="ratePage(4)" data-rating="4">★</span>
+    <span class="star" onclick="ratePage(5)" data-rating="5">★</span>
+  </div>
+  <script>
+    const body = document.body;
+    const constBotonModo = document.getElementById("BotonModo");
+    const imagenClaro = document.getElementById("imagenClaro");
+    const imagenOscuro = document.getElementById("imagenOscuro");
+
+    // Aquí ocurre la magia
+    constBotonModo.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+
+      // Verifica si el modo oscuro está activado
+      const isDarkMode = body.classList.contains("dark-mode");
+
+      // Actualiza el texto del botón y el emoji en función del modo
+      if (isDarkMode) {
+        constBotonModo.textContent = "🌞";
+        // Cambia a la imagen en modo oscuro
+        imagenClaro.style.display = "none";
+        imagenOscuro.style.display = "block";
+      } else {
+        constBotonModo.textContent = "🌙";
+        // Cambia a la imagen en modo claro
+        imagenClaro.style.display = "block";
+        imagenOscuro.style.display = "none";
+      }
+    });
+    function highlightStars() {
+      const stars = ratingContainer.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        if (index + 1 <= userRating) {
+          star.classList.add('rated');
+        } else {
+          star.classList.remove('rated');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
